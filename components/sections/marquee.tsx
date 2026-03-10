@@ -18,23 +18,27 @@ export function Marquee({
   pauseOnHover = true,
 }: MarqueeProps) {
   return (
-    <div
-      className={`group flex overflow-hidden [--duration:${speed}s] ${className}`}
-    >
-      <div
-        className={`flex shrink-0 items-center gap-8 ${
-          direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
-        } ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
-      >
-        {children}
-      </div>
-      <div
-        aria-hidden
-        className={`flex shrink-0 items-center gap-8 ${
-          direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
-        } ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
-      >
-        {children}
+    <div className={`relative overflow-hidden ${className}`}>
+      {/* Fade-Masken links und rechts */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-[var(--bg-base)] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-[var(--bg-base)] to-transparent" />
+
+      <div className={`group flex [--duration:${speed}s]`}>
+        <div
+          className={`flex shrink-0 items-center gap-8 ${
+            direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
+          } ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
+        >
+          {children}
+        </div>
+        <div
+          aria-hidden
+          className={`flex shrink-0 items-center gap-8 ${
+            direction === "left" ? "animate-marquee-left" : "animate-marquee-right"
+          } ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""}`}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

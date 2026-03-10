@@ -21,13 +21,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -170,10 +163,10 @@ const testimonials = [
 ];
 
 const stats = [
-  { value: 50, suffix: "+", label: "Automatisierte Prozesse" },
-  { value: 2400, suffix: "+", label: "Eingesparte Stunden / Jahr" },
-  { value: 98, suffix: "%", label: "Kundenzufriedenheit" },
-  { value: 4, prefix: "<", suffix: " Wo.", label: "Time-to-Value" },
+  { value: 20, suffix: "+", prefix: "", label: "Stunden Ersparnis / Woche" },
+  { value: 3, suffix: "", prefix: "<", label: "Monate bis ROI" },
+  { value: 98, suffix: "%", prefix: "", label: "Kundenzufriedenheit" },
+  { value: 100, suffix: "%", prefix: "", label: "DSGVO-konform" },
 ];
 
 const faqs = [
@@ -204,15 +197,24 @@ const faqs = [
   },
 ];
 
+// --- Gradient Separator ---
+function GradientSeparator() {
+  return (
+    <div className="mx-auto max-w-5xl px-8">
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    </div>
+  );
+}
+
 // --- Komponente ---
 
 export default function HomePage() {
   return (
     <>
       {/* ============================================================
-          1. HERO — Interaktives Dashboard als Blickfang
+          1. HERO — bg-base + Glow
           ============================================================ */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden py-16 md:py-28" style={{ background: "var(--bg-base)" }}>
         {/* Background Glow */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/4 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
@@ -234,7 +236,7 @@ export default function HomePage() {
               <br />
               Volle Kontrolle.
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-slate-400 md:text-xl">
+            <p className="mt-6 text-lg leading-relaxed text-[#8888aa] md:text-xl">
               Wir bauen Ihr Operating System — ein zentrales Dashboard mit
               automatisierten Workflows, das alle Abteilungen verbindet und
               manuelle Arbeit eliminiert.
@@ -271,16 +273,16 @@ export default function HomePage() {
 
           {/* Tool-Marquee */}
           <AnimatedSection delay={0.5} className="mt-12">
-            <p className="mb-4 text-center text-xs uppercase tracking-widest text-slate-500">
+            <p className="mb-4 text-center text-xs uppercase tracking-widest text-[#44445a]">
               Integriert mit Ihren bestehenden Tools
             </p>
             <Marquee className="py-2">
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-4 py-2 text-sm text-slate-400"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.03] px-4 py-2 text-sm text-[#8888aa]"
                 >
-                  <Zap className="h-3.5 w-3.5 text-blue-400" />
+                  <Zap className="h-3.5 w-3.5 text-blue-400/60" />
                   {tool}
                 </span>
               ))}
@@ -290,9 +292,9 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          2. PROBLEM — Schmerzpunkte
+          2. PROBLEM — bg-raised (hebt sich ab)
           ============================================================ */}
-      <section className="relative border-y border-white/5 py-20">
+      <section className="relative py-24" style={{ background: "var(--bg-raised)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-14 max-w-2xl text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-sm text-red-400">
@@ -302,7 +304,7 @@ export default function HomePage() {
               Ihr Team arbeitet hart —{" "}
               <span className="text-red-400">aber an den falschen Dingen</span>
             </h2>
-            <p className="mt-4 text-slate-400">
+            <p className="mt-4 text-[#8888aa]">
               Die meisten KMUs verlieren jede Woche 20+ Stunden an manuelle
               Routineaufgaben, die längst automatisiert sein könnten.
             </p>
@@ -311,14 +313,14 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {painPoints.map((point) => (
               <StaggerItem key={point.title}>
-                <div className="group rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all hover:border-red-500/20 hover:bg-red-500/[0.03]">
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10">
-                    <point.icon className="h-6 w-6 text-red-400" />
+                <div className="group rounded-2xl border border-white/[0.06] p-6 transition-all duration-300 hover:border-red-500/30 hover:bg-red-500/[0.04]" style={{ background: "var(--bg-surface)" }}>
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-red-500/10 transition-colors group-hover:bg-red-500/20">
+                    <point.icon className="h-5 w-5 text-red-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">
                     {point.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  <p className="mt-2 text-sm leading-relaxed text-[#8888aa]">
                     {point.description}
                   </p>
                 </div>
@@ -328,10 +330,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GradientSeparator />
+
       {/* ============================================================
-          3. WORKFLOW VISUALIZER — Interaktive Vorher/Nachher
+          3. WORKFLOW VISUALIZER — bg-base
           ============================================================ */}
-      <section className="py-20">
+      <section className="py-24" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-12 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
@@ -340,7 +344,7 @@ export default function HomePage() {
                 vollautomatisiert
               </span>
             </h2>
-            <p className="mt-4 text-slate-400">
+            <p className="mt-4 text-[#8888aa]">
               Klicken Sie zwischen den Modi um den Unterschied zu sehen — live,
               in Echtzeit.
             </p>
@@ -353,16 +357,16 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          4. LEISTUNGEN — Ergebnisse statt Features
+          4. LEISTUNGEN — bg-raised
           ============================================================ */}
-      <section className="border-y border-white/5 py-20">
+      <section className="py-24" style={{ background: "var(--bg-raised)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-14 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
               Was wir für Sie tun —{" "}
               <span className="text-blue-400">und was sich ändert</span>
             </h2>
-            <p className="mt-4 text-slate-400">
+            <p className="mt-4 text-[#8888aa]">
               Drei Kernbereiche, ein Ziel: Ihrem Unternehmen Zeit und Geld
               zurückgeben.
             </p>
@@ -371,17 +375,15 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {services.map((service) => (
               <StaggerItem key={service.title}>
-                <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all hover:border-white/10">
-                  {/* Glow on hover */}
+                <div className="group relative overflow-hidden rounded-2xl border border-white/[0.06] p-6 transition-all duration-300 hover:border-white/10" style={{ background: "var(--bg-surface)" }}>
+                  {/* Top accent line */}
                   <div
-                    className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity group-hover:opacity-100"
-                    style={{
-                      background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${service.color}10, transparent 40%)`,
-                    }}
+                    className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity group-hover:opacity-100"
+                    style={{ background: `linear-gradient(to right, transparent, ${service.color}, transparent)` }}
                   />
                   <div className="relative">
                     <div
-                      className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl"
+                      className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-colors"
                       style={{ backgroundColor: `${service.color}15` }}
                     >
                       <service.icon
@@ -398,7 +400,7 @@ export default function HomePage() {
                     >
                       {service.result}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                    <p className="mt-3 text-sm leading-relaxed text-[#8888aa]">
                       {service.description}
                     </p>
                     <Link
@@ -416,10 +418,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GradientSeparator />
+
       {/* ============================================================
-          5. WIE ES FUNKTIONIERT — 3 Schritte
+          5. WIE ES FUNKTIONIERT — bg-base
           ============================================================ */}
-      <section className="py-20">
+      <section className="py-24" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-14 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
@@ -429,10 +433,13 @@ export default function HomePage() {
           </AnimatedSection>
 
           <StaggerContainer className="relative grid gap-8 md:grid-cols-3">
+            {/* Verbindungslinie zwischen Steps (Desktop) */}
+            <div className="pointer-events-none absolute top-10 left-[16.7%] right-[16.7%] hidden h-px bg-gradient-to-r from-blue-500/30 via-blue-500/20 to-blue-500/30 md:block" />
+
             {steps.map((step, i) => (
               <StaggerItem key={step.number}>
                 <div className="relative text-center">
-                  <div className="relative z-10 mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-500/20 bg-blue-500/10 shadow-lg shadow-blue-500/10">
+                  <div className="relative z-10 mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-500/20 shadow-lg shadow-blue-500/10" style={{ background: "var(--bg-surface)" }}>
                     <step.icon className="h-8 w-8 text-blue-400" />
                   </div>
                   <div className="mb-2 text-sm font-bold text-blue-400">
@@ -441,7 +448,7 @@ export default function HomePage() {
                   <h3 className="text-xl font-semibold text-white">
                     {step.title}
                   </h3>
-                  <p className="mt-3 leading-relaxed text-slate-400">
+                  <p className="mt-3 leading-relaxed text-[#8888aa]">
                     {step.description}
                   </p>
                 </div>
@@ -465,12 +472,12 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          6. SOCIAL PROOF — Zahlen + Testimonials
+          6. SOCIAL PROOF — bg-raised + Akzentfarben
           ============================================================ */}
-      <section className="border-y border-white/5 py-20">
+      <section className="py-28" style={{ background: "var(--bg-raised)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           {/* Statistiken */}
-          <StaggerContainer className="mb-16 grid grid-cols-2 gap-8 md:grid-cols-4">
+          <StaggerContainer className="mb-20 grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat) => (
               <StaggerItem key={stat.label}>
                 <div className="text-center">
@@ -481,14 +488,16 @@ export default function HomePage() {
                       prefix={stat.prefix}
                     />
                   </p>
-                  <p className="mt-1 text-sm text-slate-400">{stat.label}</p>
+                  <p className="mt-1 text-sm text-[#8888aa]">{stat.label}</p>
                 </div>
               </StaggerItem>
             ))}
           </StaggerContainer>
 
+          <GradientSeparator />
+
           {/* Testimonials */}
-          <AnimatedSection className="mx-auto mb-10 max-w-2xl text-center">
+          <AnimatedSection className="mx-auto mb-10 mt-20 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
               Das sagen unsere Kunden
             </h2>
@@ -497,34 +506,28 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
               <StaggerItem key={t.name}>
-                <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-                  <Quote className="mb-3 h-8 w-8 text-blue-500/20" />
-                  <p className="leading-relaxed text-slate-300">
-                    &ldquo;{t.quote}&rdquo;
+                <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] p-6 transition-all duration-300 hover:border-blue-500/20" style={{ background: "var(--bg-surface)" }}>
+                  {/* Grosses Anfuehrungszeichen als Design-Element */}
+                  <div className="text-6xl font-serif leading-none text-blue-400/20 mb-4">&ldquo;</div>
+                  <p className="text-sm leading-relaxed text-white/70">
+                    {t.quote}
                   </p>
-                  <div className="mt-5 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-sm font-bold text-blue-400">
+                  <div className="mt-6 flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+                    {/* Initialen-Avatar mit Gradient */}
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-sm font-semibold text-white">
                       {t.name
                         .split(" ")
                         .map((n) => n[0])
                         .join("")}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="text-sm font-medium text-white">
                         {t.name}
                       </p>
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-[#44445a]">
                         {t.role}, {t.company}
                       </p>
                     </div>
-                  </div>
-                  <div className="mt-3 flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-4 w-4 fill-yellow-500 text-yellow-500"
-                      />
-                    ))}
                   </div>
                 </div>
               </StaggerItem>
@@ -533,10 +536,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GradientSeparator />
+
       {/* ============================================================
-          7. ÜBER UNS — Kurz, Vertrauen
+          7. ÜBER UNS — bg-base
           ============================================================ */}
-      <section className="py-20">
+      <section className="py-24" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <AnimatedSection>
@@ -544,7 +549,7 @@ export default function HomePage() {
                 Wir kennen Ihre Herausforderungen —{" "}
                 <span className="text-blue-400">aus eigener Erfahrung</span>
               </h2>
-              <p className="mt-6 leading-relaxed text-slate-400">
+              <p className="mt-6 leading-relaxed text-[#8888aa]">
                 Hoba Automation wurde gegründet, weil wir selbst erlebt haben,
                 wie viel Potenzial in mittelständischen Unternehmen
                 brachliegt. Unser Ansatz ist pragmatisch: Was funktioniert,
@@ -552,16 +557,16 @@ export default function HomePage() {
                 wir weg.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+              <div className="mt-8 flex flex-wrap gap-3">
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.06] px-4 py-2 text-sm text-[#8888aa]" style={{ background: "var(--bg-surface)" }}>
                   <Shield className="h-4 w-4 text-blue-400" />
                   DSGVO-konform
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.06] px-4 py-2 text-sm text-[#8888aa]" style={{ background: "var(--bg-surface)" }}>
                   <Award className="h-4 w-4 text-blue-400" />
                   Zertifizierte Experten
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.06] px-4 py-2 text-sm text-[#8888aa]" style={{ background: "var(--bg-surface)" }}>
                   <Users className="h-4 w-4 text-blue-400" />
                   DACH-Region
                 </div>
@@ -580,29 +585,31 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-8">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+              <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] p-8" style={{ background: "linear-gradient(135deg, var(--bg-surface), var(--bg-raised))" }}>
+                {/* Subtle glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.08),transparent_60%)]" />
+                <div className="relative grid grid-cols-2 gap-4">
+                  <div className="rounded-xl border border-white/[0.06] p-4 text-center" style={{ background: "var(--bg-base)" }}>
                     <p className="text-3xl font-bold text-blue-400">
-                      <AnimatedCounter value={350} suffix="+" />
+                      <AnimatedCounter value={20} suffix="+" />
                     </p>
-                    <p className="mt-1 text-xs text-slate-400">System-Builds</p>
+                    <p className="mt-1 text-xs text-[#44445a]">Std. gespart / Woche</p>
                   </div>
-                  <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+                  <div className="rounded-xl border border-white/[0.06] p-4 text-center" style={{ background: "var(--bg-base)" }}>
                     <p className="text-3xl font-bold text-purple-400">
-                      <AnimatedCounter value={6} />
+                      <AnimatedCounter value={4} suffix=" Wo." prefix="<" />
                     </p>
-                    <p className="mt-1 text-xs text-slate-400">Wochen Setup</p>
+                    <p className="mt-1 text-xs text-[#44445a]">Time-to-Value</p>
                   </div>
-                  <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+                  <div className="rounded-xl border border-white/[0.06] p-4 text-center" style={{ background: "var(--bg-base)" }}>
                     <p className="text-3xl font-bold text-green-400">98%</p>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="mt-1 text-xs text-[#44445a]">
                       Zufriedenheit
                     </p>
                   </div>
-                  <div className="rounded-xl border border-white/5 bg-white/5 p-4 text-center">
+                  <div className="rounded-xl border border-white/[0.06] p-4 text-center" style={{ background: "var(--bg-base)" }}>
                     <p className="text-3xl font-bold text-yellow-400">24/7</p>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="mt-1 text-xs text-[#44445a]">
                       Automation aktiv
                     </p>
                   </div>
@@ -614,16 +621,16 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          8. FAQ
+          8. FAQ — bg-raised
           ============================================================ */}
-      <section className="border-y border-white/5 py-20">
+      <section className="py-16" style={{ background: "var(--bg-raised)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
             <AnimatedSection className="mb-10 text-center">
               <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
                 Häufige Fragen
               </h2>
-              <p className="mt-4 text-slate-400">
+              <p className="mt-4 text-[#8888aa]">
                 Antworten auf die wichtigsten Fragen zur Automatisierung im
                 Mittelstand.
               </p>
@@ -635,12 +642,12 @@ export default function HomePage() {
                   <AccordionItem
                     key={index}
                     value={`faq-${index}`}
-                    className="border-white/5"
+                    className="border-white/[0.06]"
                   >
                     <AccordionTrigger className="text-left text-base font-medium text-white hover:text-blue-400 [&[data-state=open]]:text-blue-400">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="leading-relaxed text-slate-400">
+                    <AccordionContent className="leading-relaxed text-[#8888aa]">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -652,21 +659,23 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          9. FINALER CTA
+          9. FINALER CTA — bg-base + starker Glow
           ============================================================ */}
-      <section className="py-20">
+      <section className="py-32" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <AnimatedSection>
-            <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/20 to-purple-600/20 p-10 text-center shadow-2xl shadow-blue-500/10 md:p-16">
+            <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border border-blue-500/20 p-10 text-center shadow-2xl shadow-blue-500/10 md:p-16" style={{ background: "var(--bg-surface)" }}>
               {/* Background Glow */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.15),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.1),transparent_50%)]" />
+              {/* Top accent line */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
 
               <div className="relative">
                 <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
                   Bereit für Ihr Operating System?
                 </h2>
-                <p className="mt-4 text-lg text-slate-300">
+                <p className="mt-4 text-lg text-white/60">
                   In einer kostenlosen 30-Minuten-Analyse zeigen wir Ihnen
                   genau, welche Prozesse Sie sofort automatisieren können.
                 </p>
@@ -682,7 +691,7 @@ export default function HomePage() {
                     </Link>
                   </Button>
                 </div>
-                <p className="mt-6 text-sm text-slate-500">
+                <p className="mt-6 text-sm text-[#44445a]">
                   Kein Risiko. Kein Verkaufsdruck. Nur Klarheit.
                 </p>
               </div>
