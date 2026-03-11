@@ -74,16 +74,19 @@
 
 :root {
   --radius: 1rem;
-  /* 3-Ebenen Hintergrund-System — aufgehellt fuer besseren Kontrast */
+  /* Dunkle Ebenen — fuer Hero, CTA und dunkle Sektionen */
   --bg-base: #0c0c18;
   --bg-raised: #111128;
   --bg-surface: #1a1a38;
-  /* Helle Blau-Akzente */
-  --blue-light: #dbeafe;
-  --blue-lighter: #eff6ff;
-  --blue-accent: #93c5fd;
-  --blue-muted: #60a5fa;
-  /* Aufgehellte Textfarben */
+  /* Helle Ebenen — fuer abwechselnde Sektionen */
+  --bg-light: #eff6ff;
+  --bg-light-raised: #dbeafe;
+  --bg-light-surface: #ffffff;
+  /* Text auf hellem Hintergrund */
+  --text-on-light: #1e293b;
+  --text-on-light-secondary: #475569;
+  --text-on-light-muted: #94a3b8;
+  /* Text auf dunklem Hintergrund */
   --text-secondary: #a0a0c0;
   --text-muted: #6a6a8a;
   /* Farbschema */

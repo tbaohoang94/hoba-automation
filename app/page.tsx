@@ -92,7 +92,7 @@ const services = [
     description:
       "Prozessanalyse mit konkretem ROI-Potenzial, priorisierte Automatisierungsroadmap, Technologieberatung ohne Vendor-Lock-in.",
     href: "/leistungen#consulting",
-    color: "#60a5fa",
+    color: "#2563eb",
   },
   {
     icon: Route,
@@ -101,7 +101,7 @@ const services = [
     description:
       "Workflows zwischen allen Systemen verknüpfen, manuelle Dateneingabe eliminieren, automatische Reportings.",
     href: "/leistungen#automation",
-    color: "#a78bfa",
+    color: "#7c3aed",
   },
   {
     icon: BarChart3,
@@ -110,7 +110,7 @@ const services = [
     description:
       "Individuelle Web-Dashboards, API-Integrationen nach Maß, datengestützte Entscheidungen ermöglichen.",
     href: "/leistungen#software",
-    color: "#34d399",
+    color: "#059669",
   },
 ];
 
@@ -198,10 +198,10 @@ const faqs = [
 ];
 
 // --- Gradient Separator ---
-function GradientSeparator() {
+function GradientSeparator({ light = false }: { light?: boolean }) {
   return (
     <div className="mx-auto max-w-5xl px-8">
-      <div className="h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent" />
+      <div className={`h-px bg-gradient-to-r from-transparent ${light ? "via-blue-300/30" : "via-blue-400/20"} to-transparent`} />
     </div>
   );
 }
@@ -212,17 +212,16 @@ export default function HomePage() {
   return (
     <>
       {/* ============================================================
-          1. HERO — bg-base + Glow
+          1. HERO — dunkel + Glow
           ============================================================ */}
       <section className="relative overflow-hidden py-20 md:py-32" style={{ background: "var(--bg-base)" }}>
-        {/* Background Glow — staerker und heller */}
+        {/* Background Glow */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/4 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-blue-500/15 blur-[120px]" />
           <div className="absolute right-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-blue-400/10 blur-[100px]" />
         </div>
 
         <div className="relative mx-auto max-w-[1280px] px-4 md:px-6">
-          {/* Text — zentriert */}
           <AnimatedSection className="mx-auto mb-12 max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-4 py-1.5 text-sm font-medium text-blue-300">
               <Bot className="h-4 w-4" />
@@ -266,12 +265,10 @@ export default function HomePage() {
             </div>
           </AnimatedSection>
 
-          {/* Interaktives Dashboard */}
           <AnimatedSection delay={0.3}>
             <HeroDashboard />
           </AnimatedSection>
 
-          {/* Tool-Marquee */}
           <AnimatedSection delay={0.5} className="mt-16">
             <p className="mb-4 text-center text-xs uppercase tracking-widest text-[var(--text-muted)]">
               Integriert mit Ihren bestehenden Tools
@@ -292,19 +289,19 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          2. PROBLEM — bg-raised (hebt sich ab)
+          2. PROBLEM — HELL (hellblau)
           ============================================================ */}
-      <section className="relative py-28" style={{ background: "var(--bg-raised)" }}>
+      <section className="relative py-28" style={{ background: "var(--bg-light)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-16 max-w-2xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-400/20 bg-red-400/10 px-3 py-1 text-sm text-red-300">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-red-300/40 bg-red-50 px-3 py-1 text-sm text-red-600">
               Kommt Ihnen das bekannt vor?
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight text-[var(--text-on-light)] md:text-4xl lg:text-5xl">
               Ihr Team arbeitet hart —{" "}
-              <span className="text-red-400">aber an den falschen Dingen</span>
+              <span className="text-red-500">aber an den falschen Dingen</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-secondary)]">
+            <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-on-light-secondary)]">
               Die meisten KMUs verlieren jede Woche 20+ Stunden an manuelle
               Routineaufgaben, die längst automatisiert sein könnten.
             </p>
@@ -313,14 +310,14 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {painPoints.map((point) => (
               <StaggerItem key={point.title}>
-                <div className="group rounded-2xl border border-blue-400/[0.08] p-7 transition-all duration-300 hover:border-red-400/30 hover:bg-red-400/[0.04] hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/5" style={{ background: "var(--bg-surface)" }}>
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-red-400/10 transition-colors group-hover:bg-red-400/20">
-                    <point.icon className="h-5 w-5 text-red-400" />
+                <div className="group rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm transition-all duration-300 hover:border-red-300/60 hover:shadow-md hover:-translate-y-1">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 transition-colors group-hover:bg-red-100">
+                    <point.icon className="h-5 w-5 text-red-500" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-[var(--text-on-light)]">
                     {point.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-on-light-secondary)]">
                     {point.description}
                   </p>
                 </div>
@@ -330,10 +327,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <GradientSeparator />
-
       {/* ============================================================
-          3. WORKFLOW VISUALIZER — bg-base
+          3. WORKFLOW VISUALIZER — dunkel
           ============================================================ */}
       <section className="py-28" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
@@ -357,16 +352,16 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          4. LEISTUNGEN — bg-raised
+          4. LEISTUNGEN — HELL (hellblau)
           ============================================================ */}
-      <section className="py-28" style={{ background: "var(--bg-raised)" }}>
+      <section className="py-28" style={{ background: "var(--bg-light)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-16 max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight text-[var(--text-on-light)] md:text-4xl lg:text-5xl">
               Was wir für Sie tun —{" "}
-              <span className="text-blue-300">und was sich ändert</span>
+              <span className="text-blue-600">und was sich ändert</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-secondary)]">
+            <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-on-light-secondary)]">
               Drei Kernbereiche, ein Ziel: Ihrem Unternehmen Zeit und Geld
               zurückgeben.
             </p>
@@ -375,7 +370,7 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {services.map((service) => (
               <StaggerItem key={service.title}>
-                <div className="group relative overflow-hidden rounded-2xl border border-blue-400/[0.08] p-7 transition-all duration-300 hover:border-blue-400/20 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/5" style={{ background: "var(--bg-surface)" }}>
+                <div className="group relative overflow-hidden rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                   {/* Top accent line */}
                   <div
                     className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity group-hover:opacity-100"
@@ -384,14 +379,14 @@ export default function HomePage() {
                   <div className="relative">
                     <div
                       className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-colors"
-                      style={{ backgroundColor: `${service.color}18` }}
+                      style={{ backgroundColor: `${service.color}12` }}
                     >
                       <service.icon
                         className="h-6 w-6"
                         style={{ color: service.color }}
                       />
                     </div>
-                    <h3 className="text-xl font-semibold text-white">
+                    <h3 className="text-xl font-semibold text-[var(--text-on-light)]">
                       {service.title}
                     </h3>
                     <p
@@ -400,12 +395,12 @@ export default function HomePage() {
                     >
                       {service.result}
                     </p>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-on-light-secondary)]">
                       {service.description}
                     </p>
                     <Link
                       href={service.href}
-                      className="mt-4 inline-flex items-center text-sm font-medium text-blue-300 transition-colors hover:text-blue-200"
+                      className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 transition-colors hover:text-blue-700"
                     >
                       Mehr erfahren
                       <ArrowRight className="ml-1 h-4 w-4" />
@@ -418,12 +413,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <GradientSeparator />
-
       {/* ============================================================
-          5. WIE ES FUNKTIONIERT — bg-base
+          5. WIE ES FUNKTIONIERT — dunkel
           ============================================================ */}
-      <section className="py-28" style={{ background: "var(--bg-base)" }}>
+      <section className="py-28" style={{ background: "var(--bg-raised)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-16 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
@@ -433,7 +426,6 @@ export default function HomePage() {
           </AnimatedSection>
 
           <StaggerContainer className="relative grid gap-8 md:grid-cols-3">
-            {/* Verbindungslinie zwischen Steps (Desktop) */}
             <div className="pointer-events-none absolute top-10 left-[16.7%] right-[16.7%] hidden h-px bg-gradient-to-r from-blue-400/30 via-blue-400/20 to-blue-400/30 md:block" />
 
             {steps.map((step, i) => (
@@ -472,33 +464,33 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          6. SOCIAL PROOF — bg-raised + Akzentfarben
+          6. SOCIAL PROOF — HELL (hellblau)
           ============================================================ */}
-      <section className="py-28" style={{ background: "var(--bg-raised)" }}>
+      <section className="py-28" style={{ background: "var(--bg-light)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           {/* Statistiken */}
           <StaggerContainer className="mb-20 grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat) => (
               <StaggerItem key={stat.label}>
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-300 md:text-4xl lg:text-5xl">
+                  <p className="text-3xl font-bold text-blue-600 md:text-4xl lg:text-5xl">
                     <AnimatedCounter
                       value={stat.value}
                       suffix={stat.suffix}
                       prefix={stat.prefix}
                     />
                   </p>
-                  <p className="mt-2 text-sm text-[var(--text-secondary)]">{stat.label}</p>
+                  <p className="mt-2 text-sm text-[var(--text-on-light-secondary)]">{stat.label}</p>
                 </div>
               </StaggerItem>
             ))}
           </StaggerContainer>
 
-          <GradientSeparator />
+          <GradientSeparator light />
 
           {/* Testimonials */}
           <AnimatedSection className="mx-auto mb-12 mt-20 max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-bold tracking-tight text-[var(--text-on-light)] md:text-4xl lg:text-5xl">
               Das sagen unsere Kunden
             </h2>
           </AnimatedSection>
@@ -506,25 +498,23 @@ export default function HomePage() {
           <StaggerContainer className="grid gap-6 md:grid-cols-3">
             {testimonials.map((t) => (
               <StaggerItem key={t.name}>
-                <div className="relative overflow-hidden rounded-2xl border border-blue-400/[0.08] p-7 transition-all duration-300 hover:border-blue-400/20 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/5" style={{ background: "var(--bg-surface)" }}>
-                  {/* Grosses Anfuehrungszeichen als Design-Element */}
-                  <div className="text-6xl font-serif leading-none text-blue-400/25 mb-4">&ldquo;</div>
-                  <p className="text-sm leading-relaxed text-white/80">
+                <div className="relative overflow-hidden rounded-2xl border border-blue-200/60 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                  <div className="text-6xl font-serif leading-none text-blue-300/50 mb-4">&ldquo;</div>
+                  <p className="text-sm leading-relaxed text-[var(--text-on-light-secondary)]">
                     {t.quote}
                   </p>
-                  <div className="mt-6 flex items-center gap-3 pt-4 border-t border-blue-400/[0.08]">
-                    {/* Initialen-Avatar mit Gradient */}
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 text-sm font-semibold text-white">
+                  <div className="mt-6 flex items-center gap-3 pt-4 border-t border-blue-100">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-sm font-semibold text-white">
                       {t.name
                         .split(" ")
                         .map((n) => n[0])
                         .join("")}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-[var(--text-on-light)]">
                         {t.name}
                       </p>
-                      <p className="text-xs text-[var(--text-muted)]">
+                      <p className="text-xs text-[var(--text-on-light-muted)]">
                         {t.role}, {t.company}
                       </p>
                     </div>
@@ -536,10 +526,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <GradientSeparator />
-
       {/* ============================================================
-          7. ÜBER UNS — bg-base
+          7. ÜBER UNS — dunkel
           ============================================================ */}
       <section className="py-28" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
@@ -586,7 +574,6 @@ export default function HomePage() {
 
             <AnimatedSection delay={0.2}>
               <div className="relative overflow-hidden rounded-2xl border border-blue-400/[0.1] p-8" style={{ background: "linear-gradient(135deg, var(--bg-surface), var(--bg-raised))" }}>
-                {/* Subtle glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(96,165,250,0.12),transparent_60%)]" />
                 <div className="relative grid grid-cols-2 gap-4">
                   <div className="rounded-xl border border-blue-400/[0.08] p-5 text-center" style={{ background: "var(--bg-base)" }}>
@@ -621,16 +608,16 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          8. FAQ — bg-raised
+          8. FAQ — HELL (hellblau)
           ============================================================ */}
-      <section className="py-20" style={{ background: "var(--bg-raised)" }}>
+      <section className="py-20" style={{ background: "var(--bg-light)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="mx-auto max-w-3xl">
             <AnimatedSection className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tight text-[var(--text-on-light)] md:text-4xl lg:text-5xl">
                 Häufige Fragen
               </h2>
-              <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-secondary)]">
+              <p className="mx-auto mt-4 max-w-[640px] text-[var(--text-on-light-secondary)]">
                 Antworten auf die wichtigsten Fragen zur Automatisierung im
                 Mittelstand.
               </p>
@@ -642,12 +629,12 @@ export default function HomePage() {
                   <AccordionItem
                     key={index}
                     value={`faq-${index}`}
-                    className="border-blue-400/[0.08]"
+                    className="border-blue-200/60"
                   >
-                    <AccordionTrigger className="text-left text-base font-medium text-white hover:text-blue-300 [&[data-state=open]]:text-blue-300">
+                    <AccordionTrigger className="text-left text-base font-medium text-[var(--text-on-light)] hover:text-blue-600 [&[data-state=open]]:text-blue-600">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="leading-relaxed text-[var(--text-secondary)]">
+                    <AccordionContent className="leading-relaxed text-[var(--text-on-light-secondary)]">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -659,16 +646,14 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          9. FINALER CTA — bg-base + starker Glow
+          9. FINALER CTA — dunkel + starker Glow
           ============================================================ */}
       <section className="py-32" style={{ background: "var(--bg-base)" }}>
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <AnimatedSection>
             <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border border-blue-400/20 p-10 text-center shadow-2xl shadow-blue-500/10 md:p-16" style={{ background: "var(--bg-surface)" }}>
-              {/* Background Glow — heller */}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(96,165,250,0.18),transparent_50%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(96,165,250,0.08),transparent_50%)]" />
-              {/* Top accent line */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
 
               <div className="relative">
