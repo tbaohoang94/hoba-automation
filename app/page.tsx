@@ -35,6 +35,8 @@ import {
 } from "@/components/sections/animated-section";
 import { AnimatedCounter, Marquee } from "@/components/sections/marquee";
 import { ToolMarquee } from "@/components/sections/tool-icons";
+import { IntegrationWheel } from "@/components/sections/integration-wheel";
+import { ProcessTimeline } from "@/components/sections/process-timeline";
 
 export const metadata: Metadata = {
   title: "Hoba Automation — AI Automation für den Mittelstand",
@@ -404,28 +406,7 @@ export default function HomePage() {
             </h2>
           </AnimatedSection>
 
-          <StaggerContainer className="relative grid gap-8 md:grid-cols-3">
-            <div className="pointer-events-none absolute top-10 left-[16.7%] right-[16.7%] hidden h-px bg-gradient-to-r from-blue-400/30 via-blue-400/20 to-blue-400/30 md:block" />
-
-            {steps.map((step, i) => (
-              <StaggerItem key={step.number}>
-                <div className="relative text-center">
-                  <div className="relative z-10 mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-400/20 shadow-lg shadow-blue-500/10" style={{ background: "var(--bg-surface)" }}>
-                    <step.icon className="h-8 w-8 text-blue-300" />
-                  </div>
-                  <div className="mb-2 text-sm font-bold text-blue-300">
-                    Schritt {step.number}
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mx-auto mt-3 max-w-[320px] leading-relaxed text-[var(--text-secondary)]">
-                    {step.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <ProcessTimeline />
 
           <AnimatedSection delay={0.4} className="mt-14 text-center">
             <Button
@@ -552,35 +533,7 @@ export default function HomePage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="relative overflow-hidden rounded-2xl border border-blue-400/[0.1] p-8" style={{ background: "linear-gradient(135deg, var(--bg-surface), var(--bg-raised))" }}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(96,165,250,0.12),transparent_60%)]" />
-                <div className="relative grid grid-cols-2 gap-4">
-                  <div className="rounded-xl border border-blue-400/[0.08] p-5 text-center" style={{ background: "var(--bg-base)" }}>
-                    <p className="text-3xl font-bold text-blue-300">
-                      <AnimatedCounter value={20} suffix="+" />
-                    </p>
-                    <p className="mt-1 text-xs text-[var(--text-muted)]">Std. gespart / Woche</p>
-                  </div>
-                  <div className="rounded-xl border border-blue-400/[0.08] p-5 text-center" style={{ background: "var(--bg-base)" }}>
-                    <p className="text-3xl font-bold text-blue-200">
-                      <AnimatedCounter value={4} suffix=" Wo." prefix="<" />
-                    </p>
-                    <p className="mt-1 text-xs text-[var(--text-muted)]">Time-to-Value</p>
-                  </div>
-                  <div className="rounded-xl border border-blue-400/[0.08] p-5 text-center" style={{ background: "var(--bg-base)" }}>
-                    <p className="text-3xl font-bold text-green-400">98%</p>
-                    <p className="mt-1 text-xs text-[var(--text-muted)]">
-                      Zufriedenheit
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-blue-400/[0.08] p-5 text-center" style={{ background: "var(--bg-base)" }}>
-                    <p className="text-3xl font-bold text-blue-300">24/7</p>
-                    <p className="mt-1 text-xs text-[var(--text-muted)]">
-                      Automation aktiv
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <IntegrationWheel />
             </AnimatedSection>
           </div>
         </div>
