@@ -34,6 +34,7 @@ import {
   StaggerItem,
 } from "@/components/sections/animated-section";
 import { AnimatedCounter, Marquee } from "@/components/sections/marquee";
+import { ToolMarquee } from "@/components/sections/tool-icons";
 
 export const metadata: Metadata = {
   title: "Hoba Automation — AI Automation für den Mittelstand",
@@ -48,20 +49,7 @@ export const metadata: Metadata = {
 
 // --- Daten ---
 
-const tools = [
-  "n8n",
-  "Make",
-  "OpenAI",
-  "Claude",
-  "Salesforce",
-  "HubSpot",
-  "SAP",
-  "DATEV",
-  "Slack",
-  "Google Workspace",
-  "Microsoft 365",
-  "Airtable",
-];
+// Tools-Liste wurde in ToolMarquee-Komponente ausgelagert (components/sections/tool-icons.tsx)
 
 const painPoints = [
   {
@@ -274,17 +262,7 @@ export default function HomePage() {
             <p className="mb-4 text-center text-xs uppercase tracking-widest text-[var(--text-muted)]">
               Integriert mit Ihren bestehenden Tools
             </p>
-            <Marquee className="py-2">
-              {tools.map((tool) => (
-                <span
-                  key={tool}
-                  className="inline-flex items-center gap-2 rounded-full border border-blue-400/10 bg-blue-400/[0.04] px-4 py-2 text-sm text-[var(--text-secondary)]"
-                >
-                  <Zap className="h-3.5 w-3.5 text-blue-400/70" />
-                  {tool}
-                </span>
-              ))}
-            </Marquee>
+            <ToolMarquee />
           </AnimatedSection>
         </div>
       </section>
