@@ -228,10 +228,12 @@ export default function HomePage() {
               AI-gestützte Automatisierung für KMUs
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
-              Dein Unternehmen.{" "}
+              Dein Unternehmen.
+              <br />
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
                 Ein System.
-              </span>{" "}
+              </span>
+              <br />
               Volle Kontrolle.
             </h1>
             <p className="mx-auto mt-6 max-w-[640px] text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl">
