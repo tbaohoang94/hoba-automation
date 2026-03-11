@@ -401,7 +401,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <AnimatedSection className="mx-auto mb-16 max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-              In 3 Schritten zum{" "}
+              In 5 Schritten zum{" "}
               <span className="text-blue-300">automatisierten Unternehmen</span>
             </h2>
           </AnimatedSection>
