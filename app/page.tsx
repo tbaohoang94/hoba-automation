@@ -231,8 +231,7 @@ export default function HomePage() {
               Dein Unternehmen.{" "}
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent">
                 Ein System.
-              </span>
-              <br />
+              </span>{" "}
               Volle Kontrolle.
             </h1>
             <p className="mx-auto mt-6 max-w-[640px] text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl">

@@ -9,7 +9,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
   title: "Leistungen",
@@ -79,18 +78,21 @@ const services = [
 export default function LeistungenPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
+      {/* Hero — dunkel (bg-base) */}
+      <section className="relative overflow-hidden py-20 md:py-28" style={{ background: "var(--bg-base)" }}>
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/4 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[120px]" />
+        </div>
+        <div className="relative mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-6 text-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-400/10 px-4 py-1.5 text-sm font-medium text-blue-300">
               Unsere Leistungen
-            </Badge>
-            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">
+            </div>
+            <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
               Drei Säulen für{" "}
-              <span className="text-primary">Ihre Effizienz</span>
+              <span className="text-blue-300">Ihre Effizienz</span>
             </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
+            <p className="mt-6 text-lg text-[var(--text-secondary)]">
               Von der strategischen Beratung über die Automatisierung bis zur
               individuellen Software-Entwicklung -- wir begleiten Sie auf dem
               gesamten Weg.
@@ -99,83 +101,138 @@ export default function LeistungenPage() {
         </div>
       </section>
 
-      {/* Leistungsbereiche */}
-      {services.map((service, index) => (
-        <section
-          key={service.id}
-          id={service.id}
-          className={`scroll-mt-20 py-20 ${
-            index % 2 === 1 ? "border-y bg-card" : ""
-          }`}
-        >
-          <div className="mx-auto max-w-7xl px-4 md:px-6">
-            <div className="grid items-start gap-12 md:grid-cols-2">
-              {/* Text-Seite */}
-              <div className={index % 2 === 1 ? "md:order-2" : ""}>
-                <Badge variant="outline" className="mb-4">
-                  {service.badge}
-                </Badge>
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
-                  <service.icon className="h-7 w-7 text-primary" />
-                </div>
-                <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-                  {service.title}
-                </h2>
-                <p className="mt-2 text-lg text-primary font-medium">
-                  {service.subtitle}
-                </p>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-                <div className="mt-8">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="rounded-full px-8 font-bold"
+      {/* Leistungsbereiche — alternierend hell/dunkel */}
+      {services.map((service, index) => {
+        const isLight = index % 2 === 0;
+        return (
+          <section
+            key={service.id}
+            id={service.id}
+            className="scroll-mt-20 py-20 md:py-28"
+            style={{ background: isLight ? "var(--bg-light)" : "var(--bg-raised)" }}
+          >
+            <div className="mx-auto max-w-[1280px] px-4 md:px-6">
+              <div className="grid items-start gap-12 md:grid-cols-2">
+                {/* Text-Seite */}
+                <div className={index % 2 === 1 ? "md:order-2" : ""}>
+                  <div
+                    className={`mb-4 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
+                      isLight
+                        ? "border border-blue-200/60 bg-blue-50 text-blue-600"
+                        : "border border-blue-400/30 bg-blue-400/10 text-blue-300"
+                    }`}
                   >
-                    <Link href="/kontakt">
-                      <CalendarCheck className="mr-2 h-5 w-5" />
-                      Kostenlose Potenzialanalyse
-                    </Link>
-                  </Button>
+                    {service.badge}
+                  </div>
+                  <div
+                    className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${
+                      isLight ? "bg-blue-100" : "bg-blue-400/10"
+                    }`}
+                  >
+                    <service.icon
+                      className={`h-7 w-7 ${isLight ? "text-blue-600" : "text-blue-300"}`}
+                    />
+                  </div>
+                  <h2
+                    className={`text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl ${
+                      isLight ? "text-[var(--text-on-light)]" : "text-white"
+                    }`}
+                  >
+                    {service.title}
+                  </h2>
+                  <p
+                    className={`mt-2 text-lg font-medium ${
+                      isLight ? "text-blue-600" : "text-blue-300"
+                    }`}
+                  >
+                    {service.subtitle}
+                  </p>
+                  <p
+                    className={`mt-4 leading-relaxed ${
+                      isLight ? "text-[var(--text-on-light-secondary)]" : "text-[var(--text-secondary)]"
+                    }`}
+                  >
+                    {service.description}
+                  </p>
+                  <div className="mt-8">
+                    <Button
+                      asChild
+                      size="lg"
+                      className={`rounded-full px-8 font-bold ${
+                        isLight
+                          ? "bg-blue-600 text-white hover:bg-blue-700"
+                          : "bg-blue-500 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-400"
+                      }`}
+                    >
+                      <Link href="/kontakt">
+                        <CalendarCheck className="mr-2 h-5 w-5" />
+                        Kostenlose Potenzialanalyse
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Bullet-Seite */}
-              <div
-                className={`rounded-2xl border bg-card p-8 ${
-                  index % 2 === 1 ? "md:order-1" : ""
-                }`}
-              >
-                <h3 className="mb-6 text-lg font-semibold">Das umfasst:</h3>
-                <ul className="space-y-4">
-                  {service.bullets.map((bullet) => (
-                    <li key={bullet} className="flex gap-3">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                      <span className="text-muted-foreground">{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Bullet-Seite */}
+                <div
+                  className={`rounded-2xl border p-8 ${
+                    isLight
+                      ? "border-blue-200/60 bg-white shadow-sm"
+                      : "border-blue-400/[0.08]"
+                  } ${index % 2 === 1 ? "md:order-1" : ""}`}
+                  style={!isLight ? { background: "var(--bg-surface)" } : undefined}
+                >
+                  <h3
+                    className={`mb-6 text-lg font-semibold ${
+                      isLight ? "text-[var(--text-on-light)]" : "text-white"
+                    }`}
+                  >
+                    Das umfasst:
+                  </h3>
+                  <ul className="space-y-4">
+                    {service.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-3">
+                        <CheckCircle2
+                          className={`mt-0.5 h-5 w-5 shrink-0 ${
+                            isLight ? "text-blue-600" : "text-blue-300"
+                          }`}
+                        />
+                        <span
+                          className={
+                            isLight
+                              ? "text-[var(--text-on-light-secondary)]"
+                              : "text-[var(--text-secondary)]"
+                          }
+                        >
+                          {bullet}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
-      {/* CTA */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
+      {/* CTA — dunkel (bg-raised) */}
+      <section className="py-20 md:py-28" style={{ background: "var(--bg-base)" }}>
+        <div className="mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
               Nicht sicher, wo Sie anfangen sollen?
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-[var(--text-secondary)]">
               Kein Problem. In unserer kostenlosen Potenzialanalyse finden wir
               gemeinsam heraus, welcher Bereich den größten Hebel für Ihr
               Unternehmen bietet.
             </p>
             <div className="mt-8">
-              <Button asChild size="lg" className="rounded-full px-8 font-bold">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full bg-blue-500 px-8 font-bold text-white shadow-lg shadow-blue-500/30 hover:bg-blue-400 hover:shadow-xl hover:shadow-blue-400/40"
+              >
                 <Link href="/kontakt">
                   Jetzt Gespräch vereinbaren
                   <ArrowRight className="ml-2 h-4 w-4" />
